@@ -1,7 +1,13 @@
+import Header from "./components/Header";
+import Home from "./pages/Home";
+
 function App() {
   return (
     <>
-      <h1>hello bangladesh</h1>
+      <div className=" font-bodyFonts">
+        <Header />
+        <Home />
+      </div>
     </>
   );
 }
