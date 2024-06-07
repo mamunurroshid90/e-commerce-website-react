@@ -6,6 +6,7 @@ function App() {
     <>
       <div className=" font-bodyFonts">
         <Header />
+
         <Home />
       </div>
     </>
