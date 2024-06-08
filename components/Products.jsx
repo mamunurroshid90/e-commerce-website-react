@@ -1,7 +1,8 @@
 import React from "react";
 import ProductsCart from "./ProductsCart";
 
-const Products = () => {
+const Products = ({ products }) => {
+  // console.log(products);
   return (
     <div className=" py-10">
       <div className=" flex flex-col items-center gap-4">
@@ -16,8 +17,10 @@ const Products = () => {
           asperiores repudiandae assumenda quidem.
         </p>
       </div>
-      <div className=" max-w-screen-xl mx-auto">
-        <ProductsCart />
+      <div className=" max-w-screen-xl mx-auto py-10 grid grid-cols-4 gap-10">
+        {products.map((item) => (
+          <ProductsCart key={item.id} />
+        ))}
       </div>
     </div>
   );
