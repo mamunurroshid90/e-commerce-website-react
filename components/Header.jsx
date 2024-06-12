@@ -32,12 +32,14 @@ const Header = () => {
               blogs
             </li>
           </ul>
-          <div className=" relative">
-            <img className=" w-6" src={cartImg} alt="cartImg" />
-            <span className=" absolute w-6 top-2 left-0 text-sm flex items-center justify-center font-semibold">
-              {productData.length}
-            </span>
-          </div>
+          <Link to="/cart">
+            <div className=" relative">
+              <img className=" w-6" src={cartImg} alt="cartImg" />
+              <span className=" absolute w-6 top-2 left-0 text-sm flex items-center justify-center font-semibold">
+                {productData.length}
+              </span>
+            </div>
+          </Link>
           <img
             className=" w-8 h-8 rounded-full"
             src="https://images.unsplash.com/photo-1717196214681-0a66168248cf?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"

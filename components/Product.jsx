@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { MdOutlineStar } from "react-icons/md";
+import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
+import { addToCart } from "../redux/bazarSlice";
+import { ToastContainer, toast } from "react-toastify";
 
 const Product = () => {
   const [productDetails, setProductDetails] = useState({});
+  let [baseQuantity, setBaseQuantity] = useState(1);
+  const dispatch = useDispatch();
   const location = useLocation();
+
   useEffect(() => {
     setProductDetails(location.state.item);
   }, []);
@@ -51,16 +57,40 @@ const Product = () => {
             <div className=" w-52 flex justify-between items-center gap-4 text-gray-500 border p-3">
               <p className=" text-sm capitalize">quantity</p>
               <div className=" flex items-center font-semibold gap-4 text-sm">
-                <button className=" border h-5 text-lg font-normal flex items-center justify-center px-2 hover:bg-gray-700 hover:text-white cursor-pointer duration-300 active:bg-black">
+                <button
+                  onClick={() =>
+                    setBaseQuantity(
+                      baseQuantity === 1 ? (baseQuantity = 1) : baseQuantity - 1
+                    )
+                  }
+                  className=" border h-5 text-lg font-normal flex items-center justify-center px-2 hover:bg-gray-700 hover:text-white cursor-pointer duration-300 active:bg-black"
+                >
                   -
                 </button>
-                <span>{1}</span>
-                <button className=" border h-5 text-lg font-normal flex items-center justify-center px-2 hover:bg-gray-700 hover:text-white cursor-pointer duration-300 active:bg-black">
+                <span>{baseQuantity}</span>
+                <button
+                  onClick={() => setBaseQuantity(baseQuantity + 1)}
+                  className=" border h-5 text-lg font-normal flex items-center justify-center px-2 hover:bg-gray-700 hover:text-white cursor-pointer duration-300 active:bg-black"
+                >
                   +
                 </button>
               </div>
             </div>
-            <button className=" bg-black text-white py-3 px-6 active:bg-gray-800">
+            <button
+              onClick={() =>
+                dispatch(
+                  addToCart({
+                    id: productDetails.id,
+                    title: productDetails.title,
+                    image: productDetails.image,
+                    price: productDetails.price,
+                    quantity: baseQuantity,
+                    description: productDetails.description,
+                  })
+                ) & toast.success(`${productDetails.title} is added`)
+              }
+              className=" bg-black text-white py-3 px-6 active:bg-gray-800"
+            >
               add to cart
             </button>
           </div>
@@ -72,6 +102,18 @@ const Product = () => {
           </p>
         </div>
       </div>
+      <ToastContainer
+        position="top-left"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </div>
   );
 };
