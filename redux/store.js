@@ -9,7 +9,6 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import bazarReducer from "./bazarSlice";
-import { version } from "react";
 import persistReducer from "redux-persist/es/persistReducer";
 import persistStore from "redux-persist/es/persistStore";
 
